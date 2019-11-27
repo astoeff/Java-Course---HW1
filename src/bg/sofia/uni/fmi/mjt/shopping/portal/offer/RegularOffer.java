@@ -5,16 +5,14 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class RegularOffer implements Offer {
+    private static final int HASHCODE_BASE = 17;
+    private static final int MULTIPLIER = 31;
+    private static final int SHIFT_NUMBER = 32;
     private LocalDate offerDate;
     private String productName;
     private String offerDescription;
     private double productPrice;
     private double productShippingPrice;
-
-    private static final int HASHCODE_BASE = 17;
-    private static final int MULTIPLIER = 31;
-    private static final int SHIFT_NUMBER = 32;
-    //private double totalPrice;
 
     public RegularOffer(String productName, LocalDate date, String description, double price, double shippingPrice) {
         this.offerDate = date;
@@ -24,11 +22,6 @@ public class RegularOffer implements Offer {
         this.productShippingPrice = shippingPrice;
     }
 
-
-    /*public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-*/
     @Override
     public String getProductName() {
         return this.productName;
@@ -77,7 +70,6 @@ public class RegularOffer implements Offer {
     // @Override
     public int hashcode() {
         int result = HASHCODE_BASE;
-
         result = MULTIPLIER * result + this.offerDate.hashCode();
         result = MULTIPLIER * result + this.productName.hashCode();
         result = MULTIPLIER * result + this.offerDescription.hashCode();

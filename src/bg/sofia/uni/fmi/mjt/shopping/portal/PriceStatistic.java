@@ -7,17 +7,14 @@ import java.time.LocalTime;
 import java.util.List;
 
 public class PriceStatistic {
-
-//    private int  numberOfAllOffersInStatistic;
-
     private String productName;
     private LocalDate statisticDate;
-    List<Offer> offers;
+    List<Offer> allOffers;
 
     public PriceStatistic(String productName, List<Offer> offers) {
         this.productName = productName;
         this.statisticDate = LocalDate.now();
-        this.offers = offers;
+        this.allOffers = offers;
     }
 
     /**
@@ -36,13 +33,13 @@ public class PriceStatistic {
      * for this product for the specific date.
      */
     public double getLowestPrice() throws UnsupportedOperationException {
-        if (offers == null) {
+        if (allOffers == null) {
             throw new UnsupportedOperationException();
         }
         double lowestPrice = -1;
-        for (int i = 0; i < offers.size(); i++) {
-            if (offers.get(i).getTotalPrice() < lowestPrice || lowestPrice == -1) {
-                lowestPrice = offers.get(i).getTotalPrice();
+        for (int i = 0; i < allOffers.size(); i++) {
+            if (allOffers.get(i).getTotalPrice() < lowestPrice || lowestPrice == -1) {
+                lowestPrice = allOffers.get(i).getTotalPrice();
             }
         }
         return lowestPrice;
@@ -53,14 +50,14 @@ public class PriceStatistic {
      * for this product for the specific date.
      */
     public double getAveragePrice() throws UnsupportedOperationException {
-        if (offers == null) {
+        if (allOffers == null) {
             throw new UnsupportedOperationException();
         }
         double totalPrice = 0;
-        for (int i = 0; i < offers.size(); i++) {
-            totalPrice += offers.get(i).getTotalPrice();
+        for (int i = 0; i < allOffers.size(); i++) {
+            totalPrice += allOffers.get(i).getTotalPrice();
         }
-        return totalPrice / offers.size();
+        return totalPrice / allOffers.size();
     }
 
 }

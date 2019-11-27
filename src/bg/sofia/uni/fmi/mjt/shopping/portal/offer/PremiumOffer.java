@@ -23,7 +23,7 @@ public class PremiumOffer extends RegularOffer {
     @Override
     public double getTotalPrice() {
         double totalPrice = super.getTotalPrice();
-        totalPrice = totalPrice - totalPrice * (offerDiscount / ROUND_PARAMETER);
+        totalPrice -= totalPrice * (offerDiscount / ROUND_PARAMETER);
         return totalPrice;
     }
 }

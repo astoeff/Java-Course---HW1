@@ -58,13 +58,7 @@ public class ShoppingDirectoryImpl implements ShoppingDirectory {
         }
         if (offersCollection.containsKey(productName)) {
             TreeSet<Offer> allOffersForProduct = offersCollection.get(productName);
-            if (allOffersForProduct == null || allOffersForProduct.isEmpty()) {
-                throw new NoOfferFoundException();
-            }
             Offer result = allOffersForProduct.iterator().next();
-            if (result == null) {
-                throw new NoOfferFoundException();
-            }
             return result;
         } else {
             throw new ProductNotFoundException();
@@ -91,11 +85,6 @@ public class ShoppingDirectoryImpl implements ShoppingDirectory {
         }
     }
 
-
-    public void addOffer(Offer offer) {
-
-    }
-
     /**
      * Submits a new offer.
      *
@@ -107,24 +96,16 @@ public class ShoppingDirectoryImpl implements ShoppingDirectory {
         if (offer == null) {
             throw new IllegalArgumentException();
         }
-        if (offersCollection.containsKey(offer.getProductName()) == false) {
-            offersCollection.put(offer.getProductName(), new TreeSet<>());
-        }
-        if (offersCollection.get(offer.getProductName()).add(offer) == false) {
-            throw new OfferAlreadySubmittedException();
-        }
-        /*if(offersCollection.get(offer.getProductName())!=null){
-            if( offersCollection.get(offer.getProductName()).contains(offer)) {
+        if (offersCollection.get(offer.getProductName()) != null) {
+            if (offersCollection.get(offer.getProductName()).contains(offer)) {
                 throw new OfferAlreadySubmittedException();
-            }else{
+            } else {
                 offersCollection.get(offer.getProductName()).add(offer);
             }
-        } else{
+        } else {
             TreeSet<Offer> offers = new TreeSet<>();
             offers.add(offer);
             offersCollection.put(offer.getProductName(), offers);
-
-        }*/
-
+        }
     }
 }
